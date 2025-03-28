@@ -153,6 +153,66 @@ bool test_array_union()
 	return true;
 }
 
+bool test_rotate_left()
+{
+	int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+	int size = 9;
+
+	cout << "\nOriginal list:     ";
+	print_array(a, size);
+
+	int n = 4;
+	cout << "Rotate left by " << n << ":  ";
+	int *b = rotate_left(a, size, n);
+	print_array(b, size);
+	cout << endl;
+
+	int expected_arr[] = {5, 6, 7, 8, 9, 1, 2, 3, 4};
+
+	for (int i = 0; i < size; i++)
+	{
+		if (b[i] != expected_arr[i])
+		{
+			cout << "FAILED: Expected value of " << expected_arr[i]
+				 << " at index " << i << ", but got " << b[i]
+				 << " instead." << endl;
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool test_rotate_right()
+{
+	int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+	int size = 9;
+
+	cout << "\nOriginal list:      ";
+	print_array(a, size);
+
+	int n = 3;
+	cout << "Rotate right by " << n << ":  ";
+	int *b = rotate_right(a, size, n);
+	print_array(b, size);
+	cout << endl;
+
+	int expected_arr[] = {7, 8, 9, 1, 2, 3, 4, 5, 6};
+
+	for (int i = 0; i < size; i++)
+	{
+		if (b[i] != expected_arr[i])
+		{
+			cout << "FAILED: Expected value of " << expected_arr[i]
+				 << " at index " << i << ", but got " << b[i]
+				 << " instead." << endl;
+			return false;
+		}
+	}
+
+	return true;
+}
+
 TEST(MIDTERM1, TestArrayDedupe)
 {
 	EXPECT_EQ(true, test_array_dedupe());
@@ -168,6 +228,16 @@ TEST(MIDTERM1, TestArrayUnion)
 	EXPECT_EQ(true, test_array_union());
 }
 
+TEST(MIDTERM1, TestRotateLeft)
+{
+	EXPECT_EQ(true, test_rotate_left());
+}
+
+TEST(MIDTERM1, TestRotateRight)
+{
+	EXPECT_EQ(true, test_rotate_right());
+}
+
 int main(int argc, char **argv)
 {
 	::testing::InitGoogleTest(&argc, argv);
@@ -180,9 +250,9 @@ int main(int argc, char **argv)
 ----------running basic_test.cpp---------
 
 
-[==========] Running 3 tests from 1 test suite.
+[==========] Running 5 tests from 1 test suite.
 [----------] Global test environment set-up.
-[----------] 3 tests from MIDTERM1
+[----------] 5 tests from MIDTERM1
 [ RUN      ] MIDTERM1.TestArrayDedupe
 
 Original array:         3  5  5  9  11  11  17
@@ -203,9 +273,21 @@ a2:    5  7  9  10  20
 union: 5  7  9  10  15  20  25
 
 [       OK ] MIDTERM1.TestArrayUnion (0 ms)
-[----------] 3 tests from MIDTERM1 (0 ms total)
+[ RUN      ] MIDTERM1.TestRotateLeft
+
+Original list:     1  2  3  4  5  6  7  8  9
+Rotate left by 4:  5  6  7  8  9  1  2  3  4
+
+[       OK ] MIDTERM1.TestRotateLeft (0 ms)
+[ RUN      ] MIDTERM1.TestRotateRight
+
+Original list:      1  2  3  4  5  6  7  8  9
+Rotate right by 3:  7  8  9  1  2  3  4  5  6
+
+[       OK ] MIDTERM1.TestRotateRight (0 ms)
+[----------] 5 tests from MIDTERM1 (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 3 tests from 1 test suite ran. (0 ms total)
-[  PASSED  ] 3 tests.
+[==========] 5 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 5 tests.
 */
